@@ -9,7 +9,23 @@ current_dir = os.getcwd()
 
 YOUTUBE_DATA_API_KEY_FOR_GITHUB_1 = os.environ['YOUTUBE_DATA_API_KEY_FOR_GITHUB_1']
 
-country_list = ['IN', 'NP', 'US']
+country_list = [
+    'IN', # India
+    'NP', # Nepal
+    'US', # United States
+    'BR', # Brazil
+    'ID', # Indonesia
+    'MX', # Mexico
+    'JP', # Japan
+    'PK', # Pakistan
+    'DE', # Germany
+    'VN', # Vietnam
+    'PH', # Philippines
+    'TR', # Turkey
+    'GB', # United Kingdom
+    'HK', # Hong Kong(China)
+    'TW' # Taiwan(China)
+]
 
 
 def api_request(page_token, country_code, api_key):
