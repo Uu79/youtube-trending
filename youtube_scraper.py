@@ -9,7 +9,7 @@ current_dir = os.getcwd()
 
 YOUTUBE_DATA_API_KEY_FOR_GITHUB_1 = os.environ['YOUTUBE_DATA_API_KEY_FOR_GITHUB_1']
 
-country_list = [
+country_list = [ # Ref https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
     'IN', # India
     'NP', # Nepal
     'US', # United States
