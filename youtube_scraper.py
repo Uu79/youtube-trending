@@ -77,16 +77,24 @@ def write_to_file(country_code, country_data):
     path = os.path.join(day_path, executed_hour)
     if not os.path.exists(path):
         os.makedirs(path)
-         
-    with open(f"{path}/{time.strftime('%y.%m.%d %H.%M.%S')}_{country_code}_YouTube_Trending_Videos.json", "w+", encoding='utf-8') as file:
+
+    file_path = f"{path}/{time.strftime('%y.%m.%d %H.%M.%S')}_{country_code}_YouTube_Trending_Videos.json"
+    with open(file_path, "w+", encoding='utf-8') as file:
         json.dump(country_data, file, ensure_ascii=False, indent=4)
         print(f"{time.strftime('%Y-%m-%d %H:%M:%S')} :: Done for {country_code}")
 
+    return file_path
+
 
 def get_data(country_codes, api_key):
+    country_data_dict = {}
     for country_code in country_codes:
         country_data = get_pages(country_code, api_key)
-        write_to_file(country_code, country_data)
+        file_path = write_to_file(country_code, country_data)
+        country_data_dict[country_code] = file_path
+
+    with open(f"{path}/newest.json", "w", encoding='utf-8') as f:
+        json.dump(country_data_dict, f, ensure_ascii=False, indent=4)
 
 
 if __name__ == "__main__":
