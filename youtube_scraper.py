@@ -93,7 +93,7 @@ def get_data(country_codes, api_key):
         file_path = write_to_file(country_code, country_data)
         country_data_dict[country_code] = file_path
 
-    with open(f"{current_dir}/newest.json", "w", encoding='utf-8') as f:
+    with open("newest.json", "w", encoding='utf-8') as f:
         json.dump(country_data_dict, f, ensure_ascii=False, indent=4)
 
 
