@@ -78,12 +78,12 @@ def write_to_file(country_code, country_data):
     if not os.path.exists(path):
         os.makedirs(path)
 
-    file_path = f"{path}/{time.strftime('%y.%m.%d %H.%M.%S')}_{country_code}_YouTube_Trending_Videos.json"
-    with open(file_path, "w+", encoding='utf-8') as file:
+    file_name = f"{time.strftime('%y.%m.%d %H.%M.%S')}_{country_code}_YouTube_Trending_Videos.json"
+    with open(f"{path}/{file_name}", "w+", encoding='utf-8') as file:
         json.dump(country_data, file, ensure_ascii=False, indent=4)
         print(f"{time.strftime('%Y-%m-%d %H:%M:%S')} :: Done for {country_code}")
 
-    return file_path
+    return os.path.join(executed_day, executed_hour, file_name)
 
 
 def get_data(country_codes, api_key):
@@ -93,7 +93,7 @@ def get_data(country_codes, api_key):
         file_path = write_to_file(country_code, country_data)
         country_data_dict[country_code] = file_path
 
-    with open("newest.json", "w", encoding='utf-8') as f:
+    with open(f"{current_dir}/newest.json", "w", encoding='utf-8') as f:
         json.dump(country_data_dict, f, ensure_ascii=False, indent=4)
 
 
