@@ -68,7 +68,7 @@ def write_to_file(country_code, country_data):
     print(f"{time.strftime('%Y-%m-%d %H:%M:%S')} :: Writing {country_code} data to file...")
 
     executed_day = time.strftime('%y.%m.%d') # Create one folder for each day
-    day_path = os.path.join(current_dir, executed_day)
+    day_path = os.path.join(current_dir, "data", executed_day)
     if not os.path.exists(day_path):
         os.makedirs(day_path)
     
@@ -83,7 +83,7 @@ def write_to_file(country_code, country_data):
         json.dump(country_data, file, ensure_ascii=False, indent=4)
         print(f"{time.strftime('%Y-%m-%d %H:%M:%S')} :: Done for {country_code}")
 
-    return os.path.join(executed_day, executed_hour, file_name)
+    return os.path.join("data", executed_day, executed_hour, file_name)
 
 
 def get_data(country_codes, api_key):
