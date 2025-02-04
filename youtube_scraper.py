@@ -9,24 +9,6 @@ current_dir = os.getcwd()
 
 YOUTUBE_DATA_API_KEY_FOR_GITHUB_1 = os.environ['YOUTUBE_DATA_API_KEY_FOR_GITHUB_1']
 
-country_list = [ # Ref https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
-    'IN', # India
-    'NP', # Nepal
-    'US', # United States
-    'BR', # Brazil
-    'ID', # Indonesia
-    'MX', # Mexico
-    'JP', # Japan
-    'PK', # Pakistan
-    'DE', # Germany
-    'VN', # Vietnam
-    'PH', # Philippines
-    'TR', # Turkey
-    'GB', # United Kingdom
-    'HK', # Hong Kong(China)
-    'TW' # Taiwan(China)
-]
-
 
 def api_request(page_token, country_code, api_key):
     video_resource = "id,snippet,contentDetails,status,statistics,player,topicDetails,recordingDetails,localizations"
@@ -87,6 +69,10 @@ def write_to_file(country_code, country_data):
 
 
 def get_data(country_codes, api_key):
+    if len(country_codes) == 0:
+        print('no country to fetch')
+        return
+
     country_data_dict = {}
     for country_code in country_codes:
         country_data = get_pages(country_code, api_key)
@@ -98,4 +84,9 @@ def get_data(country_codes, api_key):
 
 
 if __name__ == "__main__":
+    country_list = []
+    if os.path.exists("countries.json"):
+        with open("countries.json", 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            country_list = list(data.keys())
     get_data(country_list, YOUTUBE_DATA_API_KEY_FOR_GITHUB_1)
